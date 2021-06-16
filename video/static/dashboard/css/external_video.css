@@ -1,0 +1,30 @@
+.open-btn {
+    margin-left: 26px;
+}
+
+.video-select {
+    width: 15%;
+    display: inline-block;
+}
+
+.add-video-area{
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    margin-top: 10px;
+    margin-left: 20px;
+    border-radius: 8px;
+    display: none;
+}
+
+.video-images{
+    width: 70px;
+}
+
+.info {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /*将简介过多的文字进行遮挡*/
+}

@@ -1,0 +1,17 @@
+input, select{
+    /*加上!important就是强制执行*/
+    width: 35% !important;
+    display: inline-block !important;
+    margin-top: 5px !important;
+}
+
+.add-url {
+    width: 50%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    margin-top: 10px;
+}
+
+#add-url-btn, #add-star-btn{
+    width: 70px !important;
+}

@@ -20,7 +20,7 @@ from app.client import urls as client_urls
 from app.dashboard import urls as dashboard_urls
 
 urlpatterns = [
-    # path('admin/', admin.site.urls), # 并不使用自带的admin,可以去掉
+    path('admin/', admin.site.urls), # 并不使用自带的admin,可以去掉
     path('dashboard/', include(dashboard_urls)),
     path('client/', include(client_urls))
 ]
