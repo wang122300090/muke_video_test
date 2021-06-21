@@ -5,7 +5,7 @@ import hashlib
 
 # 对密码进行加密
 def hash_password(password):
-    if isinstance(password,str):
+    if isinstance(password, str):
         password = password.encode('utf-8')
     return hashlib.md5(password).hexdigest().upper()
 
@@ -13,7 +13,7 @@ def hash_password(password):
 class ClientUser(models.Model):
     username = models.CharField(max_length=50, null=False, unique=True)
     password = models.CharField(max_length=255, null=False)
-    avator = models.CharField(max_length=500, default='')
+    avatar = models.CharField(max_length=500, default='')
     gender = models.CharField(max_length=10, default='')
     birthday = models.DateTimeField(null=True, blank=True, default=None)
     status = models.BooleanField(default=True, db_index=True)
@@ -47,7 +47,7 @@ class ClientUser(models.Model):
     def update_password(self, old_password, new_password):
         hash_old_password = hash_password(old_password)
 
-        if hash_old_password !=self.password:
+        if hash_old_password != self.password:
             return False
         hash_new_password = hash_password(new_password)
         self.password = hash_new_password

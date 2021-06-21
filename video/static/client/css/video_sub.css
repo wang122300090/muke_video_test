@@ -1,0 +1,53 @@
+.video-image {
+    width: 100%;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+span {
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: 0.2rem;
+}
+
+.info {
+    margin-bottom: 1rem;
+    display: block;
+}
+.number-ul {
+    margin-bottom: 3rem;
+}
+.number-ul li {
+    display: inline-block;
+}
+
+.comment-area {
+    width: 100%;
+}
+.comment-area a {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+
+.comment-area textarea {
+    width: 96%;
+    border: solid 1px ;
+    height: 4rem;
+    border-radius: 0.5rem;
+}
+
+#comment-submit{
+    border: solid 1px;
+    padding: 0.2rem;
+    margin-left: 0.1rem;
+    zoom: 1.1;
+}
+
+.comment-show-area {
+    margin-bottom: 3rem;
+    display: block;
+}

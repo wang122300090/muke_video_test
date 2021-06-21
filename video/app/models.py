@@ -3,4 +3,5 @@
 
 from .model.auth import ClientUser
 from .model.video import Video, VideoSub, VideoStar, IdentityType, NationalityType, VideoType
+from .model.comment import Comment
 

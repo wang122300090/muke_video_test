@@ -7,6 +7,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator  # 分页
 from app.utils.permission import dashboard_auth
+from app.models import ClientUser
+from django.http import JsonResponse
 
 
 
@@ -86,4 +88,23 @@ class UpdateAdminStatus(View):
         user.update(is_superuser=_status)
         return redirect(reverse('admin_manager'))
     # 这里是老师发生错误了,应该需要传入用户的id
+
+
+class ClientManager(View):
+    TEMPLATE = 'dashboard/auth/client_user.html'
+
+    def get(self, request):
+
+        users = ClientUser.objects.all()
+        data = {'users': users}
+        return render_to_response(request, self.TEMPLATE, data=data)
+
+    def post(self, request):
+        user_id = request.POST.get('userId')
+        user = ClientUser.objects.get(pk=user_id)
+        print(user)
+        user.update_status()
+        # 这里用ajax,否则就需要重写get方法,也可以修改get方法
+        return JsonResponse({'code': 0, 'msg': 'success'})
+
 

@@ -6,6 +6,7 @@ from app.libs.base_render import render_to_response
 from app.utils.permission import dashboard_auth
 from app.model.video import VideoType, FromType, NationalityType, Video, VideoSub, IdentityType, VideoStar
 from app.utils.common import check_and_get_video_type, handle_video
+from app.models import Comment
 
 
 class ExternalVideo(View):
@@ -28,7 +29,7 @@ class ExternalVideo(View):
     def post(self, request):
         name = request.POST.get('name')
         image = request.POST.get('image')
-        video_type =request.POST.get('video_type')
+        video_type = request.POST.get('video_type')
         info = request.POST.get('info')
         from_to = request.POST.get('from_to')
         nationality = request.POST.get('nationality')
@@ -36,7 +37,7 @@ class ExternalVideo(View):
         video_id = request.POST.get('video_id')  #更新视频加上的
 
         if video_id:
-            reverse_path = reverse('video_update', kwargs={'video_id':video_id})
+            reverse_path = reverse('video_update', kwargs={'video_id': video_id})
         else:
             reverse_path = reverse('external_video')
 
@@ -91,9 +92,11 @@ class VideoSubView(View):
         data = {}
         video = Video.objects.get(pk=video_id)
         error = request.GET.get('error', '')
+        comments = Comment.objects.filter(video=video).order_by('-id')
 
         data['video'] = video
         data['error'] = error
+        data['comments'] = comments
         return render_to_response(request, self.TEMPLATE, data=data)
 
     def post(self, request, video_id):

@@ -6,6 +6,7 @@ from django.conf import settings  # 这里是对的
 import shutil
 from app.libs.base_qiniu import video_qiniu
 from app.models import VideoSub, Video
+from app.tasks.task import video_task
 
 
 def check_and_get_video_type(type_obj, type_value, message):
@@ -37,28 +38,13 @@ def handle_video(video_file, video_id, number):
     # print(path_name, out_path)
     # os.system('ls')  #使用os.system来实现是命令行的功能,在video目录下
     command = 'ffmpeg -i {} -vcodec copy -acodec copy {}.mp4'.format(path_name, out_path)
-    os.system(command)
-
-    out_name = '.'.join([out_path, 'mp4'])
-    if not os.path.exists(out_name):
-        remove_path([out_name, path_name])  # 上传失败,删掉本地的中转视频
-        return False
-    url = video_qiniu.put(video_file.name, out_name)
-    # print(url)
-    if url:
-        video = Video.objects.get(pk=video_id)
-
-        try:
-            VideoSub.objects.create(
-                video=video,
-                url=url,
-                number=number
-            )
-            return True
-        except:
-            remove_path([out_name, path_name])
-            return False
-    remove_path([out_name, path_name])
+    video = Video.objects.get(pk=video_id)
+    video_sub = VideoSub.objects.create(
+        video=video,
+        url='',
+        number=number
+    )
+    video_task.delay(command, out_path, path_name, video_file.name, video_sub.id)  # 开始异步执行
     return False
 
 

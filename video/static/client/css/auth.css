@@ -1,0 +1,24 @@
+.form {
+    width: 70%;
+    margin: 20% auto;
+    padding: 5%;
+}
+
+.form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    border: solid 1px;
+}
+
+button {
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.user-area {
+    width: 25%;
+    margin: 20% auto;
+    text-align: center;
+}
