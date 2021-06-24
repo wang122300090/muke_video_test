@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 # coding: uft-8
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
 from django.urls import path, include
 from app.client import urls as client_urls
@@ -24,3 +25,7 @@ urlpatterns = [
     path('dashboard/', include(dashboard_urls)),
     path('client/', include(client_urls))
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+
+# supervisor的启动命令:supervisord -c /etc/supervisord.conf
